@@ -1,5 +1,5 @@
 # <h1 align="center">Laporan Praktikum Modul 2 - ... </h1>
-<p align="center"> Raga Prasetyo - 109082500028 </p>
+<p align="center"> Raga Prasetyo - [NIM]</p>
 
 ## Unguided 
 
@@ -130,5 +130,4 @@ func main() {
 ##### Output 
 ![Screenshot Output Unguided 1_1](https://github.com/ragaprasetyo7/109082500028_Raga-Prasetyo_2/blob/main/modul2/output/output-soal3.png)
 [penjelasan]
-
 Program ini digunakan untuk menghitung biaya pengiriman parsel berdasarkan berat barang dalam satuan gram. Program terlebih dahulu meminta pengguna memasukkan berat parsel, kemudian berat tersebut diubah menjadi kilogram dan sisa gram. Biaya dihitung dengan tarif Rp10.000 per kilogram. Untuk sisa berat dalam gram, jika sisa berat kurang dari 500 gram maka dikenakan biaya Rp15 per gram, sedangkan jika sisa berat sama dengan atau lebih dari 500 gram maka dikenakan biaya Rp5 per gram. Namun apabila berat parsel melebihi 10 kilogram, maka biaya untuk sisa gram akan digratiskan. Setelah semua perhitungan selesai, program akan menampilkan detail berat, detail biaya, dan total biaya pengiriman. 
