@@ -1,22 +1,42 @@
 package main
 import "fmt"
 
-func f(x int) int {
-	return x * x
-}
+func hitungSkor(soal *int, skor *int) {
+	var waktu int
+	*soal = 0
+	*skor = 0
 
-func g(x int) int {
-	return x - 2
-}
-
-func h(x int) int {
-	return x + 1
+	for i := 0; i < 8; i++ {
+		fmt.Scan(&waktu)
+		if waktu <= 300 {
+			*soal++
+			*skor += waktu
+		}
+	}
 }
 
 func main() {
-	var a, b, c int
-	fmt.Scan(&a, &b, &c)
-	fmt.Println(f(g(h(a))))
-	fmt.Println(g(h(f(b))))
-	fmt.Println(h(f(g(c))))
+	var nama, pemenang string
+	var soal, skor int
+	var maxSoal, minSkor int
+
+	maxSoal = -1
+	minSkor = 999999
+
+	for {
+		fmt.Scan(&nama)
+		if nama == "Selesai" {
+			break
+		}
+
+		hitungSkor(&soal, &skor)
+
+		if soal > maxSoal || (soal == maxSoal && skor < minSkor) {
+			maxSoal = soal
+			minSkor = skor
+			pemenang = nama
+		}
+	}
+
+	fmt.Println(pemenang, maxSoal, minSkor)
 }

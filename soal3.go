@@ -1,36 +1,23 @@
 package main
-import (
-	"fmt"
-	"math"
-)
 
-func jarak(a, b, c, d float64) float64 {
-	return math.Sqrt((a-c)*(a-c) + (b-d)*(b-d))
-}
+import "fmt"
 
-func didalam(cx, cy, r, x, y float64) bool {
-	return jarak(x, y, cx, cy) <= r
+func cetakDeret(n int) {
+	for {
+		fmt.Print(n, " ")
+		if n == 1 {
+			break
+		}
+		if n%2 == 0 {
+			n = n / 2
+		} else {
+			n = 3*n + 1
+		}
+	}
 }
 
 func main() {
-	var cx1, cy1, r1 float64
-	var cx2, cy2, r2 float64
-	var x, y float64
-
-	fmt.Scan(&cx1, &cy1, &r1)
-	fmt.Scan(&cx2, &cy2, &r2)
-	fmt.Scan(&x, &y)
-
-	dalam1 := didalam(cx1, cy1, r1, x, y)
-	dalam2 := didalam(cx2, cy2, r2, x, y)
-
-	if dalam1 && dalam2 {
-		fmt.Println("Titik di dalam lingkaran 1 dan 2")
-	} else if dalam1 {
-		fmt.Println("Titik di dalam lingkaran 1")
-	} else if dalam2 {
-		fmt.Println("Titik di dalam lingkaran 2")
-	} else {
-		fmt.Println("Titik di luar lingkaran 1 dan 2")
-	}
+	var n int
+	fmt.Scan(&n)
+	cetakDeret(n)
 }
