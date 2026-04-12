@@ -1,14 +1,15 @@
 package main
 import "fmt"
 
-func faktor(n int, i int) {
-	if i > n {
+func barisan(n int) {
+	if n == 0 {
 		return
 	}
-	if n%i == 0 {
-		fmt.Print(i, " ")
+	fmt.Print(n, " ")
+	barisan(n - 1)
+	if n != 1 {
+		fmt.Print(n, " ")
 	}
-	faktor(n, i+1)
 }
 
 func main() {
@@ -16,5 +17,5 @@ func main() {
 	fmt.Print("Masukkan bilangan: ")
 	fmt.Scan(&n)
 
-	faktor(n, 1)
+	barisan(n)
 }

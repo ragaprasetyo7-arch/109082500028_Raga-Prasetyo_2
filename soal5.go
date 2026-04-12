@@ -1,14 +1,14 @@
 package main
 import "fmt"
 
-func faktor(n int, i int) {
+func ganjil(i int, n int) {
 	if i > n {
 		return
 	}
-	if n%i == 0 {
+	if i%2 != 0 {
 		fmt.Print(i, " ")
 	}
-	faktor(n, i+1)
+	ganjil(i+1, n)
 }
 
 func main() {
@@ -16,5 +16,5 @@ func main() {
 	fmt.Print("Masukkan bilangan: ")
 	fmt.Scan(&n)
 
-	faktor(n, 1)
+	ganjil(1, n)
 }
