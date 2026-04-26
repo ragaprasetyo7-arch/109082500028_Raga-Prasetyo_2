@@ -1,23 +1,47 @@
 package main
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-func fibonacci(n int) int {
-	if n == 0 {
-		return 0
-	} else if n == 1 {
-		return 1
-	} else {
-		return fibonacci(n-1) + fibonacci(n-2)
-	}
+type titik struct {
+	x int
+	y int
+}
+
+type lingkaran struct {
+	pusat titik
+	r int
+}
+
+func jarak(p, q titik) float64 {
+	return math.Sqrt(float64((p.x-q.x)*(p.x-q.x) + (p.y-q.y)*(p.y-q.y)))
+}
+
+func didalam(c lingkaran, p titik) bool {
+	return jarak(c.pusat, p) <= float64(c.r)
 }
 
 func main() {
-	var n int
-	fmt.Print("Masukkan jumlah suku: ")
-	fmt.Scan(&n)
+	var l [2]lingkaran
+	var p titik
 
-	fmt.Println("Deret Fibonacci:")
-	for i := 0; i <= n; i++ {
-		fmt.Printf("S%d = %d\n", i, fibonacci(i))
+	for i := 0; i < 2; i++ {
+		fmt.Scan(&l[i].pusat.x, &l[i].pusat.y, &l[i].r)
+	}
+
+	fmt.Scan(&p.x, &p.y)
+
+	in1 := didalam(l[0], p)
+	in2 := didalam(l[1], p)
+
+	if in1 && in2 {
+		fmt.Println("Titik di dalam lingkaran 1 dan 2")
+	} else if in1 {
+		fmt.Println("Titik di dalam lingkaran 1")
+	} else if in2 {
+		fmt.Println("Titik di dalam lingkaran 2")
+	} else {
+		fmt.Println("Titik di luar lingkaran 1 dan 2")
 	}
 }
