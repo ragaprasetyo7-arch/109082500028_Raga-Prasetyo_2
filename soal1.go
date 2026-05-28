@@ -1,47 +1,31 @@
 package main
-import (
-	"fmt"
-	"math"
-)
-
-type titik struct {
-	x int
-	y int
-}
-
-type lingkaran struct {
-	pusat titik
-	r int
-}
-
-func jarak(p, q titik) float64 {
-	return math.Sqrt(float64((p.x-q.x)*(p.x-q.x) + (p.y-q.y)*(p.y-q.y)))
-}
-
-func didalam(c lingkaran, p titik) bool {
-	return jarak(c.pusat, p) <= float64(c.r)
-}
+import "fmt"
 
 func main() {
-	var l [2]lingkaran
-	var p titik
+	var N int
+	var berat [1000]float64
+	var min, max float64
 
-	for i := 0; i < 2; i++ {
-		fmt.Scan(&l[i].pusat.x, &l[i].pusat.y, &l[i].r)
+	fmt.Print("Masukkan jumlah anak kelinci: ")
+	fmt.Scan(&N)
+
+	for i := 0; i < N; i++ {
+		fmt.Printf("Masukkan berat kelinci ke-%d: ", i+1)
+		fmt.Scan(&berat[i])
+
+		if i == 0 {
+			min = berat[i]
+			max = berat[i]
+		} else {
+			if berat[i] < min {
+				min = berat[i]
+			}
+			if berat[i] > max {
+				max = berat[i]
+			}
+		}
 	}
 
-	fmt.Scan(&p.x, &p.y)
-
-	in1 := didalam(l[0], p)
-	in2 := didalam(l[1], p)
-
-	if in1 && in2 {
-		fmt.Println("Titik di dalam lingkaran 1 dan 2")
-	} else if in1 {
-		fmt.Println("Titik di dalam lingkaran 1")
-	} else if in2 {
-		fmt.Println("Titik di dalam lingkaran 2")
-	} else {
-		fmt.Println("Titik di luar lingkaran 1 dan 2")
-	}
+	fmt.Printf("Berat kelinci terkecil: %.2f\n", min)
+	fmt.Printf("Berat kelinci terbesar: %.2f\n", max)
 }

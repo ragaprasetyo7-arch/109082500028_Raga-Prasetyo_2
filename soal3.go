@@ -1,42 +1,49 @@
 package main
 import "fmt"
 
-func main() {
-	var klubA, klubB string
-	var hasil [100]string
-	var skorA, skorB, i, n int
+type arrBalita [100]float64
 
-	fmt.Print("Klub A : ")
-	fmt.Scan(&klubA)
+func hitungMinMax(arrBerat arrBalita, n int, bMin, bMax *float64) {
+	*bMin = arrBerat[0]
+	*bMax = arrBerat[0]
 
-	fmt.Print("Klub B : ")
-	fmt.Scan(&klubB)
-
-	i = 1
-	n = 0
-
-	for {
-		fmt.Printf("Pertandingan %d : ", i)
-		fmt.Scan(&skorA, &skorB)
-
-		if skorA < 0 || skorB < 0 {
-			break
+	for i := 1; i < n; i++ {
+		if arrBerat[i] < *bMin {
+			*bMin = arrBerat[i]
 		}
 
-		if skorA > skorB {
-			hasil[n] = klubA
-			fmt.Printf("Hasil %d : %s\n", i, klubA)
-		} else if skorB > skorA {
-			hasil[n] = klubB
-			fmt.Printf("Hasil %d : %s\n", i, klubB)
-		} else {
-			hasil[n] = "Draw"
-			fmt.Printf("Hasil %d : Draw\n", i)
+		if arrBerat[i] > *bMax {
+			*bMax = arrBerat[i]
 		}
+	}
+}
 
-		n++
-		i++
+func rerata(arrBerat arrBalita, n int) float64 {
+	var total float64
+
+	for i := 0; i < n; i++ {
+		total += arrBerat[i]
 	}
 
-	fmt.Println("Pertandingan selesai")
+	return total / float64(n)
+}
+
+func main() {
+	var data arrBalita
+	var n int
+	var min, max float64
+
+	fmt.Print("Masukan banyak data berat balita : ")
+	fmt.Scan(&n)
+
+	for i := 0; i < n; i++ {
+		fmt.Printf("Masukan berat balita ke-%d: ", i+1)
+		fmt.Scan(&data[i])
+	}
+
+	hitungMinMax(data, n, &min, &max)
+
+	fmt.Printf("Berat balita minimum: %.2f kg\n", min)
+	fmt.Printf("Berat balita maksimum: %.2f kg\n", max)
+	fmt.Printf("Rerata berat balita: %.2f kg\n", rerata(data, n))
 }

@@ -1,81 +1,45 @@
 package main
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
 func main() {
-	var n int
-	var a [100]int
+	var x, y int
+	var ikan [1000]float64
 
-	fmt.Scan(&n)
-
-	for i := 0; i < n; i++ {
-		fmt.Scan(&a[i])
-	}
-
-	for i := 0; i < n; i++ {
-		fmt.Print(a[i], " ")
-	}
-	fmt.Println()
-
-	for i := 1; i < n; i += 2 {
-		fmt.Print(a[i], " ")
-	}
-	fmt.Println()
-
-	for i := 0; i < n; i += 2 {
-		fmt.Print(a[i], " ")
-	}
-	fmt.Println()
-
-	var x int
+	fmt.Print("Masukkan jumlah ikan: ")
 	fmt.Scan(&x)
 
-	for i := 0; i < n; i++ {
-		if i%x == 0 {
-			fmt.Print(a[i], " ")
+	fmt.Print("Masukkan kapasitas ikan per wadah: ")
+	fmt.Scan(&y)
+
+	for i := 0; i < x; i++ {
+		fmt.Printf("Masukkan berat ikan ke-%d: ", i+1)
+		fmt.Scan(&ikan[i])
+	}
+
+	jumlahWadah := (x + y - 1) / y
+	var totalWadah [1000]float64
+	var totalSemua float64
+
+	index := 0
+
+	for i := 0; i < jumlahWadah; i++ {
+		total := 0.0
+
+		for j := 0; j < y && index < x; j++ {
+			total += ikan[index]
+			index++
 		}
-	}
-	fmt.Println()
 
-	var idx int
-	fmt.Scan(&idx)
-
-	for i := idx; i < n-1; i++ {
-		a[i] = a[i+1]
-	}
-	n--
-
-	for i := 0; i < n; i++ {
-		fmt.Print(a[i], " ")
-	}
-	fmt.Println()
-
-	jumlah := 0
-	for i := 0; i < n; i++ {
-		jumlah += a[i]
+		totalWadah[i] = total
+		totalSemua += total
 	}
 
-	rata := float64(jumlah) / float64(n)
-	fmt.Printf("%.2f\n", rata)
-
-	var total float64
-	for i := 0; i < n; i++ {
-		total += math.Pow(float64(a[i])-rata, 2)
+	fmt.Println("Total berat tiap wadah:")
+	for i := 0; i < jumlahWadah; i++ {
+		fmt.Printf("Wadah %d = %.2f\n", i+1, totalWadah[i])
 	}
 
-	sd := math.Sqrt(total / float64(n))
-	fmt.Printf("%.2f\n", sd)
+	rata := totalSemua / float64(jumlahWadah)
 
-	var cari, frek int
-	fmt.Scan(&cari)
-
-	for i := 0; i < n; i++ {
-		if a[i] == cari {
-			frek++
-		}
-	}
-
-	fmt.Println(frek)
+	fmt.Printf("Rata-rata berat tiap wadah = %.2f\n", rata)
 }
