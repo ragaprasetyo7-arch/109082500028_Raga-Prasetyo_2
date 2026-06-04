@@ -2,44 +2,44 @@ package main
 import "fmt"
 
 func main() {
-	var x, y int
-	var ikan [1000]float64
+	var x int
+	var masuk, sah int
+	var suara [21]int
 
-	fmt.Print("Masukkan jumlah ikan: ")
-	fmt.Scan(&x)
+	for {
+		fmt.Scan(&x)
+		masuk++
 
-	fmt.Print("Masukkan kapasitas ikan per wadah: ")
-	fmt.Scan(&y)
-
-	for i := 0; i < x; i++ {
-		fmt.Printf("Masukkan berat ikan ke-%d: ", i+1)
-		fmt.Scan(&ikan[i])
-	}
-
-	jumlahWadah := (x + y - 1) / y
-	var totalWadah [1000]float64
-	var totalSemua float64
-
-	index := 0
-
-	for i := 0; i < jumlahWadah; i++ {
-		total := 0.0
-
-		for j := 0; j < y && index < x; j++ {
-			total += ikan[index]
-			index++
+		if x == 0 {
+			break
 		}
 
-		totalWadah[i] = total
-		totalSemua += total
+		if x >= 1 && x <= 20 {
+			sah++
+			suara[x]++
+		}
 	}
 
-	fmt.Println("Total berat tiap wadah:")
-	for i := 0; i < jumlahWadah; i++ {
-		fmt.Printf("Wadah %d = %.2f\n", i+1, totalWadah[i])
+	ketua := 1
+	for i := 2; i <= 20; i++ {
+		if suara[i] > suara[ketua] {
+			ketua = i
+		}
 	}
 
-	rata := totalSemua / float64(jumlahWadah)
+	wakil := -1
+	for i := 1; i <= 20; i++ {
+		if i != ketua {
+			if wakil == -1 ||
+				suara[i] > suara[wakil] ||
+				(suara[i] == suara[wakil] && i < wakil) {
+				wakil = i
+			}
+		}
+	}
 
-	fmt.Printf("Rata-rata berat tiap wadah = %.2f\n", rata)
+	fmt.Println("Suara masuk:", masuk)
+	fmt.Println("Suara sah:", sah)
+	fmt.Println("Ketua RT:", ketua)
+	fmt.Println("Wakil ketua:", wakil)
 }

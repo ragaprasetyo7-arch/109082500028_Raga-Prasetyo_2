@@ -2,30 +2,30 @@ package main
 import "fmt"
 
 func main() {
-	var N int
-	var berat [1000]float64
-	var min, max float64
+	var x int
+	var masuk, sah int
+	var suara [21]int
 
-	fmt.Print("Masukkan jumlah anak kelinci: ")
-	fmt.Scan(&N)
+	for {
+		fmt.Scan(&x)
+		masuk++
 
-	for i := 0; i < N; i++ {
-		fmt.Printf("Masukkan berat kelinci ke-%d: ", i+1)
-		fmt.Scan(&berat[i])
+		if x == 0 {
+			break
+		}
 
-		if i == 0 {
-			min = berat[i]
-			max = berat[i]
-		} else {
-			if berat[i] < min {
-				min = berat[i]
-			}
-			if berat[i] > max {
-				max = berat[i]
-			}
+		if x >= 1 && x <= 20 {
+			sah++
+			suara[x]++
 		}
 	}
 
-	fmt.Printf("Berat kelinci terkecil: %.2f\n", min)
-	fmt.Printf("Berat kelinci terbesar: %.2f\n", max)
+	fmt.Println("Suara masuk:", masuk)
+	fmt.Println("Suara sah:", sah)
+
+	for i := 1; i <= 20; i++ {
+		if suara[i] > 0 {
+			fmt.Printf("%d: %d\n", i, suara[i])
+		}
+	}
 }
