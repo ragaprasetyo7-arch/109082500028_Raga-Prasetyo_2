@@ -2,30 +2,37 @@ package main
 import "fmt"
 
 func main() {
-	var x int
-	var masuk, sah int
-	var suara [21]int
+	var n int
+	fmt.Scan(&n)
 
-	for {
-		fmt.Scan(&x)
-		masuk++
+	for k := 0; k < n; k++ {
+		var m int
+		fmt.Scan(&m)
 
-		if x == 0 {
-			break
+		arr := make([]int, m)
+
+		for i := 0; i < m; i++ {
+			fmt.Scan(&arr[i])
 		}
 
-		if x >= 1 && x <= 20 {
-			sah++
-			suara[x]++
-		}
-	}
+		for i := 0; i < m-1; i++ {
+			minIdx := i
 
-	fmt.Println("Suara masuk:", masuk)
-	fmt.Println("Suara sah:", sah)
+			for j := i + 1; j < m; j++ {
+				if arr[j] < arr[minIdx] {
+					minIdx = j
+				}
+			}
 
-	for i := 1; i <= 20; i++ {
-		if suara[i] > 0 {
-			fmt.Printf("%d: %d\n", i, suara[i])
+			arr[i], arr[minIdx] = arr[minIdx], arr[i]
 		}
+
+		for i := 0; i < m; i++ {
+			if i > 0 {
+				fmt.Print(" ")
+			}
+			fmt.Print(arr[i])
+		}
+		fmt.Println()
 	}
 }

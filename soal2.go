@@ -1,45 +1,68 @@
 package main
+
 import "fmt"
 
-func main() {
-	var x int
-	var masuk, sah int
-	var suara [21]int
+func selectionSort(arr []int) {
+	n := len(arr)
 
-	for {
-		fmt.Scan(&x)
-		masuk++
+	for i := 0; i < n-1; i++ {
+		minIdx := i
 
-		if x == 0 {
-			break
-		}
-
-		if x >= 1 && x <= 20 {
-			sah++
-			suara[x]++
-		}
-	}
-
-	ketua := 1
-	for i := 2; i <= 20; i++ {
-		if suara[i] > suara[ketua] {
-			ketua = i
-		}
-	}
-
-	wakil := -1
-	for i := 1; i <= 20; i++ {
-		if i != ketua {
-			if wakil == -1 ||
-				suara[i] > suara[wakil] ||
-				(suara[i] == suara[wakil] && i < wakil) {
-				wakil = i
+		for j := i + 1; j < n; j++ {
+			if arr[j] < arr[minIdx] {
+				minIdx = j
 			}
 		}
-	}
 
-	fmt.Println("Suara masuk:", masuk)
-	fmt.Println("Suara sah:", sah)
-	fmt.Println("Ketua RT:", ketua)
-	fmt.Println("Wakil ketua:", wakil)
+		arr[i], arr[minIdx] = arr[minIdx], arr[i]
+	}
+}
+
+func main() {
+	var n int
+	fmt.Scan(&n)
+
+	for daerah := 0; daerah < n; daerah++ {
+		var m int
+		fmt.Scan(&m)
+
+		var ganjil []int
+		var genap []int
+
+		for i := 0; i < m; i++ {
+			var rumah int
+			fmt.Scan(&rumah)
+
+			if rumah%2 == 0 {
+				genap = append(genap, rumah)
+			} else {
+				ganjil = append(ganjil, rumah)
+			}
+		}
+
+		selectionSort(ganjil)
+		selectionSort(genap)
+
+		first := true
+
+		// Cetak ganjil ascending
+		for i := 0; i < len(ganjil); i++ {
+			if !first {
+				fmt.Print(" ")
+			}
+			fmt.Print(ganjil[i])
+			first = false
+		}
+
+		// Cetak genap descending
+		for i := len(genap) - 1; i >= 0; i-- {
+			if !first {
+				fmt.Print(" ")
+			}
+			fmt.Print(genap[i])
+			first = false
+		}
+
+		fmt.Println()
+	}
 }

@@ -1,47 +1,51 @@
 package main
 import "fmt"
 
-const NMAX = 1000000
+func selectionSort(arr []int) {
+	n := len(arr)
 
-var data [NMAX]int
+	for i := 0; i < n-1; i++ {
+		minIdx := i
+
+		for j := i + 1; j < n; j++ {
+			if arr[j] < arr[minIdx] {
+				minIdx = j
+			}
+		}
+
+		arr[i], arr[minIdx] = arr[minIdx], arr[i]
+	}
+}
 
 func main() {
-	var n, k int
+	var data []int
 
-	fmt.Scan(&n, &k)
+	for {
+		var x int
+		fmt.Scan(&x)
 
-	isiArray(n)
+		if x == -5313 {
+			break
+		}
 
-	idx := posisi(n, k)
+		if x == 0 {
 
-	if idx == -1 {
-		fmt.Println("TIDAK ADA")
-	} else {
-		fmt.Println(idx)
-	}
-}
+			temp := make([]int, len(data))
+			copy(temp, data)
 
-func isiArray(n int) {
-	for i := 0; i < n; i++ {
-		fmt.Scan(&data[i])
-	}
-}
+			selectionSort(temp)
 
-func posisi(n, k int) int {
-	kr := 0
-	kn := n - 1
+			n := len(temp)
 
-	for kr <= kn {
-		med := (kr + kn) / 2
+			if n%2 == 1 {
+				fmt.Println(temp[n/2])
+			} else {
+				median := (temp[n/2-1] + temp[n/2]) / 2
+				fmt.Println(median)
+			}
 
-		if data[med] == k {
-			return med
-		} else if data[med] < k {
-			kr = med + 1
 		} else {
-			kn = med - 1
+			data = append(data, x)
 		}
 	}
-
-	return -1
 }

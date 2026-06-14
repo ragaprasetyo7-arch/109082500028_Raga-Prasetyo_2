@@ -1,183 +1,430 @@
-# <h1 align="center">Laporan Praktikum Modul 12- ... </h1>
+# <h1 align="center">Laporan Praktikum Modul 14- ... </h1>
 <p align="center"> Raga Prasetyo - [109082500028]</p>
 
 ## Unguided 
 
 ### 1. [Soal]
 #### soal1.go
-Pada pemilihan ketua RT yang baru saja berlangsung, terdapat 20 calon ketua yang bertanding
-memperebutkan suara warga. Perhitungan suara dapat segera dilakukan karena warga cukup
-mengisi formulir dengan nomor dari calon ketua RT yang dipilihnya. Seperti biasa, selalu ada
-pengisian yang tidak tepat atau dengan nomor pilihan di luar yang tersedia, sehingga data juga
-harus divalidasi. Tugas Anda untuk membuat program mencari siapa yang memenangkan
-pemilihan ketua RT.
-Buatlah program pilkart yang akan membaca, memvalidasi, dan menghitung suara yang
-diberikan dalam pemilihan ketua RT tersebut.
+Hercules, preman terkenal seantero ibukota, memiliki kerabat di banyak daerah. Tentunya
+Hercules sangat suka mengunjungi semua kerabatnya itu.
+Diberikan masukan nomor rumah dari semua kerabatnya di suatu daerah, buatlah program
+rumahkerabat yang akan menyusun nomor-nomor rumah kerabatnya secara terurut
+membesar menggunakan algoritma selection sort.
 ```go
 package main
 import "fmt"
 
 func main() {
-	var x int
-	var masuk, sah int
-	var suara [21]int
+	var n int
+	fmt.Scan(&n)
 
-	for {
-		fmt.Scan(&x)
-		masuk++
+	for k := 0; k < n; k++ {
+		var m int
+		fmt.Scan(&m)
 
-		if x == 0 {
-			break
+		arr := make([]int, m)
+
+		for i := 0; i < m; i++ {
+			fmt.Scan(&arr[i])
 		}
 
-		if x >= 1 && x <= 20 {
-			sah++
-			suara[x]++
-		}
-	}
+		for i := 0; i < m-1; i++ {
+			minIdx := i
 
-	fmt.Println("Suara masuk:", masuk)
-	fmt.Println("Suara sah:", sah)
+			for j := i + 1; j < m; j++ {
+				if arr[j] < arr[minIdx] {
+					minIdx = j
+				}
+			}
 
-	for i := 1; i <= 20; i++ {
-		if suara[i] > 0 {
-			fmt.Printf("%d: %d\n", i, suara[i])
+			arr[i], arr[minIdx] = arr[minIdx], arr[i]
 		}
+
+		for i := 0; i < m; i++ {
+			if i > 0 {
+				fmt.Print(" ")
+			}
+			fmt.Print(arr[i])
+		}
+		fmt.Println()
 	}
 }
 ```
 ### Output Unguided :
 
 ##### Output 
-![Screenshot Output Unguided 1_1](https://github.com/ragaprasetyo7/109082500028_Raga-Prasetyo_2/blob/main/modul12/output/output-soal1.png)
+![Screenshot Output Unguided 1_1](https://github.com/ragaprasetyo7/109082500028_Raga-Prasetyo_2/blob/main/modul14/output/output-soal1.png)
 [penjelasan]
-Program ini digunakan untuk membaca dan menghitung hasil pemungutan suara pemilihan ketua RT. Data masukan berupa deretan bilangan bulat yang merepresentasikan nomor calon yang dipilih oleh warga.
-Program akan membaca data hingga ditemukan angka 0 sebagai penanda akhir masukan.
-Setiap data yang memiliki nilai antara 1 sampai 20 dianggap sebagai suara sah dan akan dihitung sesuai nomor calon yang dipilih. Sementara itu, data di luar rentang tersebut dianggap 
-tidak sah dan tidak ikut dihitung sebagai suara calon. Setelah seluruh data selesai dibaca, program menampilkan jumlah suara yang masuk, jumlah suara sah, serta daftar calon yang memperoleh suara beserta jumlah suara yang diperolehnya.
+Program ini digunakan untuk mengurutkan nomor rumah kerabat Hercules pada setiap daerah menggunakan metode Selection Sort. Program menerima masukan berupa jumlah daerah dan daftar nomor rumah pada masing-masing daerah. 
+Selanjutnya, data nomor rumah diurutkan secara menaik (ascending) dengan cara mencari nilai terkecil pada bagian array yang belum terurut, kemudian menukarnya dengan elemen pada posisi yang sesuai. 
+Setelah proses pengurutan selesai, program menampilkan nomor rumah yang telah terurut dari yang terkecil hingga terbesar untuk setiap daerah.
 ### 2. [Soal]
 #### soal2.go
-Berdasarkan program sebelumnya, buat program pilkart yang mencari siapa pemenang
-pemilihan ketua RT. Sekaligus juga ditentukan bahwa wakil ketua RT adalah calon yang
-mendapatkan suara terbanyak kedua. Jika beberapa calon mendapatkan suara terbanyak yang
-sama, ketua terpilih adalah dengan nomor peserta yang paling kecil dan wakilnya dengan
-nomor peserta terkecil berikutnya.
+Belakangan diketahui ternyata Hercules itu tidak berani menyeberang jalan, maka selalu
+diusahakan agar hanya menyeberang jalan sesedikit mungkin, hanya diujung jalan. Karena
+nomor rumah sisi kiri jalan selalu ganjil dan sisi kanan jalan selalu genap, maka buatlah
+program kerabat dekat yang akan menampilkan nomor rumah mulai dari nomor yang ganjil
+lebih dulu terurut membesar dan kemudian menampilkan nomor rumah dengan nomor
+genap terurut mengecil.
 ```go
 package main
+
 import "fmt"
 
-func main() {
-	var x int
-	var masuk, sah int
-	var suara [21]int
+func selectionSort(arr []int) {
+	n := len(arr)
 
-	for {
-		fmt.Scan(&x)
-		masuk++
+	for i := 0; i < n-1; i++ {
+		minIdx := i
 
-		if x == 0 {
-			break
-		}
-
-		if x >= 1 && x <= 20 {
-			sah++
-			suara[x]++
-		}
-	}
-
-	ketua := 1
-	for i := 2; i <= 20; i++ {
-		if suara[i] > suara[ketua] {
-			ketua = i
-		}
-	}
-
-	wakil := -1
-	for i := 1; i <= 20; i++ {
-		if i != ketua {
-			if wakil == -1 ||
-				suara[i] > suara[wakil] ||
-				(suara[i] == suara[wakil] && i < wakil) {
-				wakil = i
+		for j := i + 1; j < n; j++ {
+			if arr[j] < arr[minIdx] {
+				minIdx = j
 			}
 		}
-	}
 
-	fmt.Println("Suara masuk:", masuk)
-	fmt.Println("Suara sah:", sah)
-	fmt.Println("Ketua RT:", ketua)
-	fmt.Println("Wakil ketua:", wakil)
+		arr[i], arr[minIdx] = arr[minIdx], arr[i]
+	}
+}
+
+func main() {
+	var n int
+	fmt.Scan(&n)
+
+	for daerah := 0; daerah < n; daerah++ {
+		var m int
+		fmt.Scan(&m)
+
+		var ganjil []int
+		var genap []int
+
+		for i := 0; i < m; i++ {
+			var rumah int
+			fmt.Scan(&rumah)
+
+			if rumah%2 == 0 {
+				genap = append(genap, rumah)
+			} else {
+				ganjil = append(ganjil, rumah)
+			}
+		}
+
+		selectionSort(ganjil)
+		selectionSort(genap)
+
+		first := true
+
+		// Cetak ganjil ascending
+		for i := 0; i < len(ganjil); i++ {
+			if !first {
+				fmt.Print(" ")
+			}
+			fmt.Print(ganjil[i])
+			first = false
+		}
+
+		// Cetak genap descending
+		for i := len(genap) - 1; i >= 0; i-- {
+			if !first {
+				fmt.Print(" ")
+			}
+			fmt.Print(genap[i])
+			first = false
+		}
+
+		fmt.Println()
+	}
 }
 
 ```
 ### Output Unguided :
 
 ##### Output 
-![Screenshot Output Unguided 1_1](https://github.com/ragaprasetyo7/109082500028_Raga-Prasetyo_2/blob/main/modul12/output/output-soal2.png)
+![Screenshot Output Unguided 1_1](https://github.com/ragaprasetyo7/109082500028_Raga-Prasetyo_2/blob/main/modul14/output/output-soal2.png)
 [penjelasan]
-Program ini digunakan untuk menentukan pasangan ketua RT dan wakil ketua RT berdasarkan hasil pemungutan suara warga. Data masukan berupa deretan nomor calon yang dipilih warga dan diakhiri dengan angka 0 sebagai penanda akhir data.
-Program terlebih dahulu melakukan validasi terhadap setiap suara yang masuk. Suara dengan nomor calon antara 1 sampai 20 dianggap sah dan dihitung ke dalam perolehan suara masing-masing calon. Setelah seluruh suara diproses, 
-program mencari calon dengan jumlah suara terbanyak sebagai ketua RT dan calon dengan jumlah suara terbanyak kedua sebagai wakil ketua RT. Jika terdapat beberapa calon dengan jumlah suara yang sama, maka calon dengan nomor yang lebih kecil akan diprioritaskan. 
-Program kemudian menampilkan jumlah suara masuk, jumlah suara sah, nomor ketua RT terpilih, dan nomor wakil ketua RT terpilih.
+Program ini digunakan untuk membantu Hercules mengunjungi kerabatnya dengan jumlah penyeberangan jalan seminimal mungkin. Nomor rumah ganjil dan genap dipisahkan ke dalam dua kelompok yang berbeda. 
+Kedua kelompok tersebut kemudian diurutkan menggunakan metode Selection Sort. Data rumah bernomor ganjil ditampilkan terlebih dahulu secara menaik (ascending), sedangkan data rumah bernomor genap ditampilkan setelahnya secara menurun (descending). 
+Dengan cara ini, Hercules dapat mengunjungi rumah di satu sisi jalan terlebih dahulu sebelum berpindah ke sisi lainnya.
 ### 3. [Soal]
 #### soal3.go
-Diberikan n data integer positif dalam keadaan terurut membesar dan sebuah integer lain k,
-apakah bilangan k tersebut ada dalam daftar bilangan yang diberikan? Jika ya, berikan
-indeksnya, jika tidak sebutkan "TIDAK ADA".
+Kompetisi pemrograman yang baru saja berlalu diikuti oleh 17 tim dari berbagai perguruan
+tinggi ternama. Dalam kompetisi tersebut, setiap tim berlomba untuk menyelesaikan
+sebanyak mungkin problem yang diberikan. Dari 13 problem yang diberikan, ada satu
+problem yang menarik. Problem tersebut mudah dipahami, hampir semua tim mencoba
+untuk menyelesaikannya, tetapi hanya 3 tim yang berhasil. Apa sih problemnya?
+Buatlah program median yang mencetak nilai median terhadap seluruh data yang sudah
+terbaca, jika data yang dibaca saat itu adalah 0.
 ```go
 package main
 import "fmt"
 
-const NMAX = 1000000
+func selectionSort(arr []int) {
+	n := len(arr)
 
-var data [NMAX]int
+	for i := 0; i < n-1; i++ {
+		minIdx := i
+
+		for j := i + 1; j < n; j++ {
+			if arr[j] < arr[minIdx] {
+				minIdx = j
+			}
+		}
+
+		arr[i], arr[minIdx] = arr[minIdx], arr[i]
+	}
+}
 
 func main() {
-	var n, k int
+	var data []int
 
-	fmt.Scan(&n, &k)
+	for {
+		var x int
+		fmt.Scan(&x)
 
-	isiArray(n)
+		if x == -5313 {
+			break
+		}
 
-	idx := posisi(n, k)
+		if x == 0 {
 
-	if idx == -1 {
-		fmt.Println("TIDAK ADA")
-	} else {
-		fmt.Println(idx)
-	}
-}
+			temp := make([]int, len(data))
+			copy(temp, data)
 
-func isiArray(n int) {
-	for i := 0; i < n; i++ {
-		fmt.Scan(&data[i])
-	}
-}
+			selectionSort(temp)
 
-func posisi(n, k int) int {
-	kr := 0
-	kn := n - 1
+			n := len(temp)
 
-	for kr <= kn {
-		med := (kr + kn) / 2
+			if n%2 == 1 {
+				fmt.Println(temp[n/2])
+			} else {
+				median := (temp[n/2-1] + temp[n/2]) / 2
+				fmt.Println(median)
+			}
 
-		if data[med] == k {
-			return med
-		} else if data[med] < k {
-			kr = med + 1
 		} else {
-			kn = med - 1
+			data = append(data, x)
 		}
 	}
-
-	return -1
 }
 ### Output Unguided :
 
 ##### Output 
-![Screenshot Output Unguided 1_1](https://github.com/ragaprasetyo7/109082500028_Raga-Prasetyo_2/blob/main/modul12/output/output-soal3.png)
+![Screenshot Output Unguided 1_1](https://github.com/ragaprasetyo7/109082500028_Raga-Prasetyo_2/blob/main/modul14/output/output-soal3.png)
 [penjelasan]
-Program ini digunakan untuk mencari posisi suatu bilangan dalam kumpulan data integer yang telah terurut secara menaik (ascending). Masukan terdiri dari jumlah data (n), nilai yang ingin dicari (k), serta n buah data integer yang sudah berada dalam kondisi terurut.
-Untuk mempercepat proses pencarian, program menggunakan algoritma Binary Search yang bekerja dengan membagi ruang pencarian menjadi dua bagian secara berulang. Pada setiap langkah, program membandingkan nilai yang dicari dengan elemen tengah array. 
-Jika nilai ditemukan, program akan menampilkan indeks atau posisi data tersebut. Namun jika seluruh proses pencarian selesai dan nilai tidak ditemukan, program akan menampilkan pesan "TIDAK ADA". 
-Penggunaan algoritma Binary Search membuat proses pencarian menjadi lebih efisien dibandingkan pencarian secara sekuensial pada data yang berukuran besar.
+Program ini digunakan untuk menentukan nilai median dari sekumpulan data bilangan bulat positif yang dibaca secara bertahap. Setiap kali program menemukan nilai 0, 
+seluruh data yang telah tersimpan akan diurutkan menggunakan metode Insertion Sort, kemudian median dari data tersebut dihitung dan ditampilkan. Jika jumlah data ganjil,
+ median adalah nilai tengah dari data yang telah terurut. Jika jumlah data genap, median diperoleh dari rata-rata dua nilai tengah yang dibulatkan ke bawah. 
+Proses ini terus dilakukan hingga program menemukan nilai penanda akhir, yaitu -5313.
+### 1. [Soal]
+#### soal1.go
+Buatlah sebuah program yang digunakan untuk membaca data integer seperti contoh yang
+diberikan di bawah ini, kemudian diurutkan (menggunakan metoda insertion sort), dan
+memeriksa apakah data yang terurut berjarak sama terhadap data sebelumnya.
+```go
+package main
+import "fmt"
+
+func main() {
+	var arr []int
+	var x int
+
+	for {
+		fmt.Scan(&x)
+		if x < 0 {
+			break
+		}
+		arr = append(arr, x)
+	}
+
+	for i := 1; i < len(arr); i++ {
+		key := arr[i]
+		j := i - 1
+
+		for j >= 0 && arr[j] > key {
+			arr[j+1] = arr[j]
+			j--
+		}
+
+		arr[j+1] = key
+	}
+
+	for i := 0; i < len(arr); i++ {
+		if i > 0 {
+			fmt.Print(" ")
+		}
+		fmt.Print(arr[i])
+	}
+	fmt.Println()
+
+	if len(arr) <= 1 {
+		fmt.Println("Data berjarak 0")
+		return
+	}
+
+	jarak := arr[1] - arr[0]
+	tetap := true
+
+	for i := 2; i < len(arr); i++ {
+		if arr[i]-arr[i-1] != jarak {
+			tetap = false
+			break
+		}
+	}
+
+	if tetap {
+		fmt.Printf("Data berjarak %d\n", jarak)
+	} else {
+		fmt.Println("Data berjarak tidak tetap")
+	}
+}
+```
+### Output Unguided :
+
+##### Output 
+![Screenshot Output Unguided 1_1](https://github.com/ragaprasetyo7/109082500028_Raga-Prasetyo_2/blob/main/modul14/output/output-soal1.png)
+[penjelasan]
+Program ini digunakan untuk membaca sekumpulan bilangan bulat non-negatif yang diinputkan oleh pengguna hingga ditemukan bilangan negatif sebagai penanda akhir masukan. Seluruh bilangan non-negatif yang telah dibaca kemudian disimpan ke dalam sebuah array dan diurutkan menggunakan metode Insertion Sort secara menaik (ascending).
+ Setelah proses pengurutan selesai, program menampilkan isi array yang telah terurut dan melakukan pemeriksaan terhadap selisih antar elemen yang berurutan. Jika seluruh selisih tersebut bernilai sama, maka program akan menampilkan informasi bahwa data memiliki jarak tetap beserta nilai jaraknya. 
+ Sebaliknya, apabila terdapat perbedaan selisih antar elemen, program akan menampilkan bahwa data memiliki jarak yang tidak tetap.
+#### soal2.go
+Sebuah program perpustakaan digunakan untuk mengelola data buku di dalam suatu
+perpustakaan. Misalnya terdefinisi struct dan array seperti berikut ini:
+const nMax : integer = 7919
+type Buku = <
+id, judul, penulis, penerbit : string
+eksemplar, tahun, rating : integer >
+type DaftarBuku = array [ 1..nMax] of Buku
+Pustaka : DaftarBuku
+nPustaka: integer
+```go
+package main
+import "fmt"
+
+const nMax = 7919
+
+type Buku struct {
+	id, judul, penulis, penerbit string
+	eksemplar, tahun, rating     int
+}
+
+type DaftarBuku [nMax]Buku
+
+func DaftarkanBuku(pustaka *DaftarBuku, n int) {
+	for i := 0; i < n; i++ {
+		fmt.Scan(
+			&(*pustaka)[i].id,
+			&(*pustaka)[i].judul,
+			&(*pustaka)[i].penulis,
+			&(*pustaka)[i].penerbit,
+			&(*pustaka)[i].eksemplar,
+			&(*pustaka)[i].tahun,
+			&(*pustaka)[i].rating,
+		)
+	}
+}
+
+func CetakTerfavorit(pustaka DaftarBuku, n int) {
+	idx := 0
+
+	for i := 1; i < n; i++ {
+		if pustaka[i].rating > pustaka[idx].rating {
+			idx = i
+		}
+	}
+
+	fmt.Println("Buku Terfavorit:")
+	fmt.Println(
+		pustaka[idx].judul,
+		pustaka[idx].penulis,
+		pustaka[idx].penerbit,
+		pustaka[idx].tahun,
+	)
+}
+
+func UrutBuku(pustaka *DaftarBuku, n int) {
+	for i := 1; i < n; i++ {
+		temp := (*pustaka)[i]
+		j := i - 1
+
+		for j >= 0 && (*pustaka)[j].rating < temp.rating {
+			(*pustaka)[j+1] = (*pustaka)[j]
+			j--
+		}
+
+		(*pustaka)[j+1] = temp
+	}
+}
+
+func Cetak5Terbaru(pustaka DaftarBuku, n int) {
+	batas := 5
+	if n < 5 {
+		batas = n
+	}
+
+	fmt.Println("5 Buku dengan Rating Tertinggi:")
+	for i := 0; i < batas; i++ {
+		fmt.Println(pustaka[i].judul)
+	}
+}
+
+func CariBuku(pustaka DaftarBuku, n int, r int) {
+	kiri := 0
+	kanan := n - 1
+	ketemu := -1
+
+	for kiri <= kanan {
+		tengah := (kiri + kanan) / 2
+
+		if pustaka[tengah].rating == r {
+			ketemu = tengah
+			break
+		} else if r > pustaka[tengah].rating {
+			kanan = tengah - 1
+		} else {
+			kiri = tengah + 1
+		}
+	}
+
+	fmt.Println("Hasil Pencarian:")
+
+	if ketemu == -1 {
+		fmt.Println("Tidak ada buku dengan rating seperti itu")
+	} else {
+		fmt.Println("Judul     :", pustaka[ketemu].judul)
+		fmt.Println("Penulis   :", pustaka[ketemu].penulis)
+		fmt.Println("Penerbit  :", pustaka[ketemu].penerbit)
+		fmt.Println("Tahun     :", pustaka[ketemu].tahun)
+		fmt.Println("Eksemplar :", pustaka[ketemu].eksemplar)
+		fmt.Println("Rating    :", pustaka[ketemu].rating)
+	}
+}
+
+func main() {
+	var pustaka DaftarBuku
+	var n, ratingCari int
+
+	fmt.Scan(&n)
+
+	DaftarkanBuku(&pustaka, n)
+
+	CetakTerfavorit(pustaka, n)
+
+	UrutBuku(&pustaka, n)
+
+	Cetak5Terbaru(pustaka, n)
+
+	fmt.Scan(&ratingCari)
+
+	CariBuku(pustaka, n, ratingCari)
+}
+
+```
+### Output Unguided :
+
+##### Output 
+![Screenshot Output Unguided 1_1](https://github.com/ragaprasetyo7/109082500028_Raga-Prasetyo_2/blob/main/modul14/output/output-soal2.png)
+[penjelasan]
+Program ini digunakan untuk mengelola data buku dalam sebuah perpustakaan. Data setiap buku terdiri atas ID buku, judul, penulis, penerbit, jumlah eksemplar, tahun terbit, dan rating. Program diawali dengan membaca sejumlah data buku yang dimasukkan oleh pengguna dan menyimpannya ke dalam array bertipe struktur (struct). 
+Selanjutnya, program menentukan dan menampilkan buku terfavorit berdasarkan rating tertinggi. Data buku kemudian diurutkan secara menurun berdasarkan nilai rating menggunakan metode Insertion Sort. Setelah proses pengurutan selesai, program menampilkan lima judul buku dengan rating tertinggi atau seluruh judul yang tersedia apabila jumlah buku kurang dari lima. 
+Terakhir, program melakukan pencarian buku berdasarkan rating yang dimasukkan pengguna menggunakan metode Binary Search. 
+Jika ditemukan buku dengan rating yang sesuai, maka seluruh informasi buku tersebut akan ditampilkan. Namun jika tidak ditemukan, program akan memberikan pesan bahwa tidak ada buku dengan rating yang dimaksud.
