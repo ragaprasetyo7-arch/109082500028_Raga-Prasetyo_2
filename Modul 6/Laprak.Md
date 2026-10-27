@@ -759,7 +759,7 @@ Total info dari kelima elemen adalah 31
 ##### Output 1
 
 contoh :
-![Screenshot Output Unguided 3_1] (https://github.com/ragaprasetyo7-arch/109082500028_Raga-Prasetyo_2/blob/main/Pertemuan2_Modul5/Output-Unguided2-1.png)
+![Screenshot Output Unguided 3_1] (https://github.com/ragaprasetyo7-arch/109082500028_Raga-Prasetyo_2/blob/main/Modul%206/soal.png)
 
 penjelasan main.cpp
 ### Penjelasan main.cpp
