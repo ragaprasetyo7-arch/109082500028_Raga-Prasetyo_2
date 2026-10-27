@@ -1,44 +1,42 @@
 #include <iostream>
-#include "list.h"
+#include "Singlylist.h"
+
 using namespace std;
 
-int main(){
-		linkedList List;
-    address nodeA, nodeB, nodeC, nodeD, nodeE = Nil;
-    createList(List);
+int main() {
+    List L;
+    address P1, P2, P3, P4, P5;
 
-    nodeA = alokasi("Dhimas", "2311102151", 20);
-    nodeB = alokasi("Arvin", "2211110014", 21);
-    nodeC = alokasi("Rizal", "2311110029", 20);
-    nodeD = alokasi("Satrio", "2211102173", 21);
-    nodeE = alokasi("Joshua", "2311102133", 21);
+    createList(L);
 
-    insertFirst(List, nodeA);
-    insertLast(List, nodeB);
-    insertAfter(List, nodeC, nodeA);
-    insertAfter(List, nodeD, nodeC);
-    insertLast(List, nodeE);
+    P1 = alokasi(2);
+    insertFirst(L, P1);
 
-    cout << "--- ISI LIST SETELAH DILAKUKAN INSERT ---" << endl;
-    printList(List);
-    cout << "jumlah node : " << nbList(List) << endl;
-    cout << endl;
+    P2 = alokasi(0);
+    insertFirst(L, P2);
 
-    // updateFirst(List);
-    // cout << "--- ISI LIST SETELAH DILAKUKAN UPDATE FIRST ---" << endl;
-    // printList(List);
+    P3 = alokasi(8);
+    insertFirst(L, P3);
 
-    // updateLast(List);
-    // cout << "--- ISI LIST SETELAH DILAKUKAN UPDATE LAST ---" << endl;
-    // printList(List);
+    P4 = alokasi(12);
+    insertFirst(L, P4);
 
-    updateAfter(List, nodeC);
-    cout << "--- ISI LIST SETELAH DILAKUKAN UPDATE AFTER ---" << endl;
-    printList(List);
+    P5 = alokasi(9);
+    insertFirst(L, P5);
 
-    updateByNim(List, "2211110014");
-    cout << "--- ISI LIST SETELAH DILAKUKAN UPDATE BY NIM ---" << endl;
-    printList(List);
-    
+    cout << "Isi Singly Linked List: ";
+    printInfo(L);
+
+    address P = findElm(L, 8);
+
+    if (P != NULL) {
+        cout << P->info << " ditemukan dalam list" << endl;
+    } else {
+        cout << "Elemen tidak ditemukan dalam list" << endl;
+    }
+
+    cout << "Total info dari kelima elemen adalah "
+         << totalInfo(L) << endl;
+
     return 0;
 }
