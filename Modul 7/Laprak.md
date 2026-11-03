@@ -7,32 +7,38 @@
 Doubly Linked List merupakan salah satu bentuk struktur data linear yang terdiri dari sekumpulan node yang saling terhubung menggunakan pointer. Setiap node memiliki tiga bagian utama, yaitu bagian untuk menyimpan data, pointer next yang menunjuk ke node berikutnya, dan pointer prev yang menunjuk ke node sebelumnya. Berbeda dengan Singly Linked List yang hanya memungkinkan penelusuran dalam satu arah, Doubly Linked List memungkinkan proses penelusuran data dilakukan dari depan ke belakang maupun sebaliknya. Struktur ini memberikan fleksibilitas dalam mengakses dan mengelola elemen yang terdapat di dalam list [1].
 
 Dalam penerapannya, Doubly Linked List memiliki dua pointer utama pada struktur list, yaitu first dan last. Pointer first digunakan untuk menunjukkan node pertama, sedangkan pointer last menunjukkan node terakhir. Pada node pertama, pointer prev bernilai NULL karena tidak terdapat node sebelumnya. Sementara itu, pada node terakhir, pointer next bernilai NULL karena tidak terdapat node setelahnya. Hubungan antarnode tersebut memungkinkan setiap elemen memiliki keterkaitan dua arah sehingga proses manipulasi data dapat dilakukan dengan lebih fleksibel [2].
+
 2. Struktur dan Mekanisme Pointer pada Doubly Linked List
 Struktur Doubly Linked List dibangun menggunakan konsep pointer yang berfungsi untuk menyimpan alamat memori dari node lain. Setiap node tidak harus menempati lokasi memori yang berurutan karena hubungan antarelemen dibentuk melalui alamat yang disimpan pada pointer. Dengan demikian, penambahan maupun penghapusan elemen dapat dilakukan tanpa harus memindahkan seluruh data seperti pada struktur data berbasis array [1].
 
 Pointer next dan prev memiliki peran yang saling melengkapi dalam menjaga hubungan antarnode. Ketika sebuah node baru ditambahkan, hubungan kedua pointer harus diperbarui agar node tersebut terhubung dengan node sebelum dan sesudahnya. Sebaliknya, ketika sebuah node dihapus, hubungan antara node yang berada di sebelah kiri dan kanannya harus disambungkan kembali. Kesalahan dalam pengaturan pointer dapat menyebabkan hubungan antarnode terputus atau membuat proses penelusuran list tidak berjalan dengan benar [2].
+
 3. Operasi Penambahan Data (Insertion)
 Insertion merupakan proses menambahkan node baru ke dalam Doubly Linked List. Penambahan data dapat dilakukan pada beberapa posisi, seperti bagian awal, bagian akhir, maupun di antara dua node yang sudah tersedia. Pada proses ini, pointer next dan prev harus disesuaikan agar hubungan dua arah antar-node tetap terjaga.
 
 Penambahan pada bagian awal dilakukan dengan menghubungkan pointer next node baru ke node pertama yang sebelumnya sudah ada. Kemudian, pointer prev dari node pertama tersebut diarahkan ke node baru dan pointer first diperbarui. Sementara itu, penambahan pada bagian akhir dilakukan dengan menghubungkan pointer prev node baru ke node terakhir sebelumnya, kemudian pointer next node terakhir diarahkan ke node baru dan pointer last diperbarui [2].
 
 Selain kedua posisi tersebut, insertion juga dapat dilakukan setelah atau sebelum node tertentu. Pada proses insertAfter, node baru ditempatkan setelah node yang telah ditentukan. Sebaliknya, insertBefore digunakan untuk menempatkan node baru sebelum node tujuan. Kedua operasi tersebut membutuhkan penyesuaian hubungan pointer pada node baru maupun node yang berada di sekitarnya.
+
 4. Operasi Penghapusan Data (Deletion)
 Deletion merupakan proses menghapus node tertentu dari Doubly Linked List. Penghapusan dapat dilakukan pada node pertama, node terakhir, maupun node yang berada di tengah list. Proses ini tidak hanya menghilangkan data dari urutan list, tetapi juga harus memastikan bahwa hubungan pointer pada node yang tersisa tetap terhubung dengan benar.
 
 Pada penghapusan node pertama, pointer first dipindahkan ke node berikutnya, kemudian pointer prev pada node pertama yang baru diatur menjadi NULL. Pada penghapusan node terakhir, pointer last dipindahkan ke node sebelumnya dan pointer next pada node terakhir yang baru diatur menjadi NULL. Sementara itu, penghapusan node di tengah dilakukan dengan menghubungkan node sebelum dan sesudah node yang dihapus secara langsung [2].
 
 Setelah node berhasil dilepaskan dari hubungan list, memori yang digunakan oleh node tersebut perlu dibebaskan agar tidak terjadi pemborosan penggunaan memori. Dalam bahasa C++, proses ini dapat dilakukan menggunakan perintah delete terhadap pointer node yang sudah tidak digunakan. Oleh karena itu, pengelolaan pointer dan memori menjadi bagian penting dalam proses deletion.
+
 5. Operasi Pembaruan, Penampilan, dan Pencarian Data
 Selain penambahan dan penghapusan, Doubly Linked List juga mendukung operasi pembaruan, penampilan, dan pencarian data. Operasi pembaruan (update) digunakan untuk mengubah informasi yang tersimpan pada suatu node tanpa harus menghapus dan membuat node baru. Pembaruan dapat dilakukan berdasarkan posisi node, misalnya node pertama, node terakhir, maupun node yang berada sebelum atau sesudah node tertentu.
 
 Operasi penampilan data (traversal) dilakukan dengan mengunjungi setiap node secara berurutan untuk membaca dan menampilkan informasi yang tersimpan. Penelusuran dapat dimulai dari pointer first menggunakan next atau dari pointer last menggunakan prev. Kemampuan tersebut menjadi salah satu kelebihan Doubly Linked List karena proses penelusuran dapat dilakukan dalam dua arah [1].
 
 Sementara itu, pencarian (searching) merupakan proses menemukan data berdasarkan kriteria tertentu. Pencarian dapat dilakukan dengan membandingkan nilai pada setiap node hingga ditemukan data yang sesuai. Dalam pengelolaan data makanan, pencarian dapat diterapkan berdasarkan nama makanan, jenis makanan, maupun nilai rating minimum. Proses ini membantu pengguna menemukan informasi yang dibutuhkan tanpa harus memeriksa seluruh data secara manual.
+
 6. Kelebihan dan Kekurangan Doubly Linked List
 Doubly Linked List memiliki beberapa kelebihan dibandingkan dengan Singly Linked List. Salah satu kelebihannya adalah kemampuan melakukan penelusuran data dalam dua arah sehingga akses terhadap node sebelumnya maupun berikutnya menjadi lebih mudah. Selain itu, proses penghapusan node tertentu dapat dilakukan secara lebih efisien apabila alamat node tersebut sudah diketahui karena pointer pada node sebelum dan sesudahnya dapat langsung diperbarui tanpa harus mencari node sebelumnya dari awal [1].
 
 Meskipun demikian, Doubly Linked List juga memiliki beberapa kekurangan. Setiap node membutuhkan ruang memori tambahan untuk menyimpan pointer prev, sehingga penggunaan memorinya lebih besar dibandingkan dengan Singly Linked List. Selain itu, proses penambahan dan penghapusan node membutuhkan pengaturan pointer yang lebih banyak. Hal tersebut membuat implementasinya lebih kompleks dan meningkatkan kemungkinan terjadinya kesalahan apabila hubungan antarpointer tidak diperbarui dengan benar [3].
+
 7. Penerapan Doubly Linked List dalam Pengelolaan Data
 Doubly Linked List dapat diterapkan pada berbagai sistem yang membutuhkan pengelolaan data secara dinamis dan memungkinkan penelusuran dua arah. Beberapa contohnya adalah navigasi riwayat halaman pada browser, pengelolaan daftar putar musik, fitur undo dan redo pada aplikasi, serta sistem pengelolaan daftar data yang membutuhkan penambahan dan penghapusan elemen secara fleksibel [3].
 
