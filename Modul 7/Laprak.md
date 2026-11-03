@@ -1004,7 +1004,7 @@ int main() {
 ##### Output 1
 
 contoh :
-![Screenshot Output Unguided 3_1] (https://github.com/ragaprasetyo7-arch/109082500028_Raga-Prasetyo_2/blob/main/Pertemuan2_Modul5/Output-Unguided2-1.png)
+![Screenshot Output Unguided 3_1] (https://github.com/ragaprasetyo7-arch/109082500028_Raga-Prasetyo_2/blob/main/Modul%207/soal%20unguieded.png)
 
 penjelasan unguided 3
 ### Penjelasan Soal 3
