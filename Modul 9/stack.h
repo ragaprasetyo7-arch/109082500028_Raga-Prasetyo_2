@@ -1,33 +1,32 @@
 
 #ifndef STACK_H
 #define STACK_H
-#define Nil NULL
 
 #include <iostream>
 using namespace std;
 
-typedef struct node *address;
+#define Nil -1
+#define MAX 20
 
-struct node
-{
-    int dataAngka;
-    address next;
-};
+typedef int infotype;
 
 struct stack
 {
-    address top;
+    infotype info[MAX];
+    int top;
 };
 
-bool isEmpty(stack listStack);
-void createStack(stack &listStack);
-address alokasi(int angka);
-void dealokasi(address &node);
+void createStack(stack &S);
+bool isEmpty(stack S);
+bool isFull(stack S);
 
-void push(stack &listStack, address nodeBaru);
-void pop(stack &listStack);
-void update(stack &listStack, int posisi);
-void view(stack listStack);
-void searchData(stack listStack, int data);
+void push(stack &S, infotype x);
+infotype pop(stack &S);
+
+void printInfo(stack S);
+void balikStack(stack &S);
+
+void pushAscending(stack &S, infotype x);
+void getInputStream(stack &S);
 
 #endif

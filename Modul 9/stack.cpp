@@ -1,155 +1,112 @@
+
 #include "stack.h"
-#include <iostream>
 
-using namespace std;
-
-bool isEmpty(stack listStack)
+void createStack(stack &S)
 {
-    if (listStack.top == Nil)
+    S.top = Nil;
+}
+
+bool isEmpty(stack S)
+{
+    return S.top == Nil;
+}
+
+bool isFull(stack S)
+{
+    return S.top == MAX - 1;
+}
+
+void push(stack &S, infotype x)
+{
+    if (isFull(S))
     {
-        return true;
+        cout << "Stack penuh!" << endl;
     }
     else
     {
-        return false;
+        S.top++;
+        S.info[S.top] = x;
     }
 }
 
-void createStack(stack &listStack)
+infotype pop(stack &S)
 {
-    listStack.top = Nil;
+    if (isEmpty(S))
+    {
+        cout << "Stack kosong!" << endl;
+        return Nil;
+    }
+
+    infotype x = S.info[S.top];
+    S.top--;
+
+    return x;
 }
 
-address alokasi(int angka)
+void printInfo(stack S)
 {
-    address nodeBaru = new node;
-    nodeBaru->dataAngka = angka;
-    nodeBaru->next = Nil;
-    return nodeBaru;
-}
-
-void dealokasi(address &node)
-{
-    node->next = Nil;
-    delete node;
-}
-
-void push(stack &listStack, address nodeBaru)
-{
-    nodeBaru->next = listStack.top;
-    listStack.top = nodeBaru;
-    cout << "Node " << nodeBaru->dataAngka << " berhasil ditambahkan kedalam stack!" << endl;
-}
-
-void pop(stack &listStack)
-{
-    address nodeHapus;
-    if (isEmpty(listStack) == true)
+    if (isEmpty(S))
     {
         cout << "Stack kosong!" << endl;
     }
     else
     {
-        nodeHapus = listStack.top;
-        listStack.top = listStack.top->next;
-        nodeHapus->next = Nil;
-        dealokasi(nodeHapus);
-        cout << "node " << nodeHapus->dataAngka << " berhasil dihapus dari stack!" << endl;
+        cout << "[TOP] ";
+
+        for (int i = S.top; i >= 0; i--)
+        {
+            cout << S.info[i] << " ";
+        }
+
+        cout << endl;
     }
 }
 
-void update(stack &listStack, int posisi)
+void balikStack(stack &S)
 {
-    if (isEmpty(listStack) == true)
+    stack temp;
+    createStack(temp);
+
+    while (!isEmpty(S))
     {
-        cout << "Stack kosong!" << endl;
+        push(temp, pop(S));
+    }
+
+    S = temp;
+}
+
+void pushAscending(stack &S, infotype x)
+{
+    if (isFull(S))
+    {
+        cout << "Stack penuh!" << endl;
     }
     else
     {
-        if (posisi == 0)
+        int i = S.top;
+
+        while (i >= 0 && S.info[i] > x)
         {
-            cout << "Posisi tidak valid!" << endl;
+            S.info[i + 1] = S.info[i];
+            i--;
         }
-        else
-        {
-            address nodeBantu = listStack.top;
-            int count = 1;
-            bool found = false;
-            while (nodeBantu != Nil)
-            {
-                if (count < posisi)
-                {
-                    nodeBantu = nodeBantu->next;
-                    count++;
-                }
-                else if (count == posisi)
-                {
-                    cout << "Update node poisisi ke-" << posisi << endl;
-                    cout << "Masukkan angka : ";
-                    cin >> nodeBantu->dataAngka;
-                    cout << "Data berhasil diupdate!" << endl;
-                    cout << endl;
-                    found = true;
-                    break;
-                }
-            }
-            if (found == false)
-            {
-                cout << "Posisi " << posisi << " tidak valid!" << endl;
-            }
-        }
+
+        S.info[i + 1] = x;
+        S.top++;
     }
 }
 
-void view(stack listStack)
+void getInputStream(stack &S)
 {
-    if (isEmpty(listStack) == true)
-    {
-        cout << "List kosong!" << endl;
-    }
-    else
-    {
-        address nodeBantu = listStack.top;
-        while (nodeBantu != Nil)
-        {
-            cout << nodeBantu->dataAngka << " ";
-            nodeBantu = nodeBantu->next;
-        }
-    }
-    cout << endl;
-}
+    char input;
 
-void searchData(stack listStack, int data)
-{
-    if (isEmpty(listStack) == true)
+    cout << "Masukkan angka (tekan Enter untuk selesai): ";
+
+    while (cin.get(input) && input != '\n')
     {
-        cout << "List kosong!" << endl;
-    }
-    else
-    {
-        address nodeBantu = listStack.top;
-        int posisi = 1;
-        bool found = false;
-        cout << "Mencari data " << data << "..." << endl;
-        while (nodeBantu != Nil)
+        if (input >= '0' && input <= '9')
         {
-            if (nodeBantu->dataAngka == data)
-            {
-                cout << "Data " << data << " ditemukan pada posisi ke-" << posisi << endl;
-                found = true;
-                cout << endl;
-                break;
-            }
-            else
-            {
-                posisi++;
-                nodeBantu = nodeBantu->next;
-            }
-        }
-        if (found == false)
-        {
-            cout << "Data " << data << " tidak ditemukan didalam stack!" << endl;
-            cout << endl;
+            push(S, input - '0');
         }
     }
 }
