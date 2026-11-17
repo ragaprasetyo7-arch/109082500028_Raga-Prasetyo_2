@@ -1,20 +1,33 @@
-#ifndef STACK_TABLE
-#define STACK_TABLE
+
+#ifndef STACK_H
+#define STACK_H
+#define Nil NULL
+
 #include <iostream>
 using namespace std;
-const int MAX = 10;
 
-struct stackTable
+typedef struct node *address;
+
+struct node
 {
-    int data[MAX];
-    int top;
+    int dataAngka;
+    address next;
 };
-bool isEmpty(stackTable s);
-bool isFull(stackTable s);
-void createStack(stackTable &s);
-void push(stackTable &s, int angka);
-void pop(stackTable &s);
-void update(stackTable &s, int posisi);
-void view(stackTable s);
-void searchData(stackTable s, int data);
+
+struct stack
+{
+    address top;
+};
+
+bool isEmpty(stack listStack);
+void createStack(stack &listStack);
+address alokasi(int angka);
+void dealokasi(address &node);
+
+void push(stack &listStack, address nodeBaru);
+void pop(stack &listStack);
+void update(stack &listStack, int posisi);
+void view(stack listStack);
+void searchData(stack listStack, int data);
+
 #endif

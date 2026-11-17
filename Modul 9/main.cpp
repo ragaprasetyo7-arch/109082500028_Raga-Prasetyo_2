@@ -5,38 +5,46 @@ using namespace std;
 
 int main()
 {
-    stackTable s;
-    createStack(s);
+    stack listStack;
+    address nodeA, nodeB, nodeC, nodeD, nodeE = Nil;
+    createStack(listStack);
 
-    push(s, 1);
-    push(s, 2);
-    push(s, 3);
-    push(s, 4);
-    push(s, 5);
+    nodeA = alokasi(1);
+    nodeB = alokasi(2);
+    nodeC = alokasi(3);
+    nodeD = alokasi(4);
+    nodeE = alokasi(5);
+
+    push(listStack, nodeA);
+    push(listStack, nodeB);
+    push(listStack, nodeC);
+    push(listStack, nodeD);
+    push(listStack, nodeE);
     cout << endl;
 
     cout << "--- Stack setelah push ---" << endl;
-    view(s);
+    view(listStack);
     cout << endl;
 
-    pop(s);
-    pop(s);
+    pop(listStack);
+    pop(listStack);
     cout << endl;
 
     cout << "--- Stack setelah pop 2 kali ---" << endl;
-    view(s);
+    view(listStack);
     cout << endl;
 
-    update(s, 2);
-    update(s, 1);
+    update(listStack, 2);
+    update(listStack, 1);
+    update(listStack, 4);
     cout << endl;
 
     cout << "--- Stack setelah update ---" << endl;
-    view(s);
+    view(listStack);
     cout << endl;
 
-    searchData(s, 4);
-    searchData(s, 9);
+    searchData(listStack, 4);
+    searchData(listStack, 9);
 
     return 0;
 }
