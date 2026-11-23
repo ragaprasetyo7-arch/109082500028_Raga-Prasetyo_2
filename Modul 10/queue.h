@@ -5,20 +5,19 @@
 #include <string>
 using namespace std;
 
-struct Node {
-    string nama;
-    Node *next;
-};
+const int MAX = 5;
 
 struct queue {
-    Node *head, *tail;
+    string nama[MAX];
+    int head;
+    int tail;
 };
 
-void CreateQueue(queue &Q);
 bool isEmpty(queue Q);
 bool isFull(queue Q);
-void enQueue(queue &Q, const string &nama);
+void CreateQueue(queue &Q);
+void enQueue(queue &Q, string nama);
 void deQueue(queue &Q);
 void viewQueue(queue Q);
-void clearQueue(queue &Q);
+
 #endif
